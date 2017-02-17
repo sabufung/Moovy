@@ -2,14 +2,20 @@ package coderschool.com.java.moovy;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import coderschool.com.java.moovy.APIEndPoints.MovieAPIEndPoint;
+import coderschool.com.java.moovy.Adapter.MoviesAdapter;
 import coderschool.com.java.moovy.Models.QueryResponse;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -21,39 +27,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MoovyActivity extends AppCompatActivity {
 
-    Gson gson = new GsonBuilder()
-            .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-            .create();
+public class MoovyActivity extends BaseActivity {
 
-
-    OkHttpClient client = new OkHttpClient.Builder()
-            .addInterceptor(new Interceptor() {
-                                @Override
-                                public okhttp3.Response intercept(Chain chain) throws IOException {
-                                    Request original = chain.request();
-                                    HttpUrl originalHttpUrl = original.url();
-
-                                    HttpUrl url = originalHttpUrl.newBuilder()
-                                            .addQueryParameter("api_key", "45d3c49989b0305dbe27ba8e88a99734")
-                                            .build();
-
-                                    // Request customization: add request headers
-                                    Request request = chain.request().newBuilder().url(url).build();
-
-                                    return chain.proceed(request);
-                                }
-                            }
-            )
-            .build();
-    // Trailing slash is needed
-    public static final String BASE_URL = "https://api.themoviedb.org/3/";
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
-            .build();
+    @BindView(R.id.rlvMovie)
+    RecyclerView rlvMovie;
+    RecyclerView.Adapter mAdapter;
+    LinearLayoutManager mLayoutManager;
 
     MovieAPIEndPoint movieAPI = retrofit.create(MovieAPIEndPoint.class);
 
@@ -62,11 +42,30 @@ public class MoovyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moovy);
+        ButterKnife.bind(this);
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        rlvMovie.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        rlvMovie.setLayoutManager(mLayoutManager);
+
+
+        // specify an adapter (see also next example)
+
+        fetchNowPlaying();
+
+    }
+
+    public void fetchNowPlaying() {
         Call<QueryResponse> listNowPlayingMovie = movieAPI.getNowPlayingMovie();
         listNowPlayingMovie.enqueue(new Callback<QueryResponse>() {
             @Override
             public void onResponse(Call<QueryResponse> call, Response<QueryResponse> response) {
-                Log.d("Xong", response.body().toString());
+                Log.d("result", response.body().getResults().toString());
+                mAdapter = new MoviesAdapter(response.body().getResults());
+                rlvMovie.setAdapter(mAdapter);
             }
 
             @Override
