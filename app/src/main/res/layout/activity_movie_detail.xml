@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="detail"
+            type="coderschool.com.java.moovy.Models.MovieDetail" />
+    </data>
+
+    <RelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/activity_movie_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F8F9F9"
+        tools:context="coderschool.com.java.moovy.MovieDetailActivity">
+
+        <com.google.android.youtube.player.YouTubePlayerView
+            android:id="@+id/yvTrailer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/yvTrailer"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <ImageView
+                    android:id="@+id/ivPoster"
+                    android:layout_width="154dp"
+                    android:layout_height="231dp"
+                    android:padding="10dp"
+                    app:imageUrl="@{detail.posterPath}"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/text_large_size"
+                        android:text="@{detail.title}"/>
+
+                    <RatingBar
+                        android:id="@+id/rbAverageVote"
+                        style="?attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvTitle"
+                        android:numStars="5"
+                        android:stepSize="0.1"
+                        android:theme="@style/RatingBar"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:id="@+id/tvGenre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@id/rbAverageVote"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_normal_size"
+                        android:text="@{detail.genres}"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvReleaseDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/tvGenre"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@{detail.releaseDate}"/>
+
+                    <TextView
+                        android:id="@+id/tvDuration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/tvReleaseDate"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/tvReleaseDate"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text='@{detail.runtime + " minutes"}'/>
+
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="0dp">
+
+                <TextView
+                    android:id="@+id/tvOverview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/text_normal_size"
+                    android:text="@{detail.overview}"/>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>
