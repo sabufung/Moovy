@@ -46,7 +46,9 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+* Hard to keep quality when it comes to many feature
+* Unable to make shadow effect of ImageView
+* Haven't implement RxJava for multiple API call
 
 ## Open-source libraries used
 
