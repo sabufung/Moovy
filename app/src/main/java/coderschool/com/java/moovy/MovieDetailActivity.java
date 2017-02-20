@@ -133,7 +133,7 @@ public class MovieDetailActivity extends BaseActivity {
         rbAverageVote.setRating(rating);
         rbAverageVote.setVisibility(View.VISIBLE);
 //        tvGenre.setText(genreText);
-//        tvDuration.setText(detail.getRuntime() + " minutes");
+        tvDuration.setVisibility(View.VISIBLE);
         binding.setDetail(detail);
     }
 }

@@ -66,20 +66,24 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder;
         context = parent.getContext();
+        configuration = context.getResources().getConfiguration();
+
         LayoutInflater inflater = LayoutInflater.from(context);
 
         switch (viewType) {
             case NORMAL:
-                View v1 = inflater.inflate(R.layout.movie, parent, false);
+                View v1;
+                if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    v1 = inflater.inflate(R.layout.movie_landscape, parent, false);
+                } else {
+                    v1 = inflater.inflate(R.layout.movie, parent, false);
+
+                }
                 viewHolder = new MovieViewHolder(v1);
                 break;
             case POPULAR:
                 View v2 = inflater.inflate(R.layout.movie_popular, parent, false);
                 viewHolder = new PopularMovieViewHolder(v2);
-                break;
-            case NORMAL_LAND:
-                View v3 = inflater.inflate(R.layout.movie_landscape, parent, false);
-                viewHolder = new MovieViewHolder(v3);
                 break;
             default:
                 View v = inflater.inflate(R.layout.movie, parent, false);
@@ -93,16 +97,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (holder.getItemViewType()) {
             case NORMAL:
+
                 MovieViewHolder vh1 = (MovieViewHolder) holder;
                 configureViewHolder1(vh1, position);
                 break;
             case POPULAR:
                 PopularMovieViewHolder vh2 = (PopularMovieViewHolder) holder;
                 configureViewHolder2(vh2, position);
-                break;
-            case NORMAL_LAND:
-                MovieViewHolder vh3 = (MovieViewHolder) holder;
-                configureViewHolder1(vh3, position);
                 break;
             default:
                 MovieViewHolder vh = (MovieViewHolder) holder;
@@ -118,7 +119,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             float rating = (float) (movie.getVoteAverage() / 2);
             vh1.getRbAverageVote().setRating(rating);
             vh1.getTvOverview().setText(movie.getOverview());
-            loadImage(vh1.getIvPoster(), movie.getPosterPath(), false);
+            if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                loadImage(vh1.getIvPoster(), movie.getBackdropPath(), true);
+            } else {
+                loadImage(vh1.getIvPoster(), movie.getPosterPath(), false);
+            }
             vh1.getIvPoster().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -149,12 +154,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemViewType(int position) {
         double average = movies.get(position).getVoteAverage();
-//        configuration = context.getResources().getConfiguration();
         if (average >= 7) {
             return POPULAR;
         } else {
-//            if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
-//                return NORMAL_LAND;
+//
             return NORMAL;
         }
     }

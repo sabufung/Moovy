@@ -93,8 +93,8 @@
                         android:layout_alignBottom="@id/tvReleaseDate"
                         android:layout_marginLeft="10dp"
                         android:layout_toRightOf="@+id/tvReleaseDate"
-
-                        android:text='@{detail.runtime + " minutes"}'
+                        android:visibility="invisible"
+                        android:text='@{String.valueOf(detail.runtime) + " minutes"}'
                         android:textColor="@color/colorPrimaryDark" />
 
 
