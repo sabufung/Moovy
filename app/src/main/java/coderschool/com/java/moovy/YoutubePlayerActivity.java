@@ -53,7 +53,7 @@ public class YoutubePlayerActivity extends BaseActivity {
                             @Override
                             public void onInitializationFailure(YouTubePlayer.Provider provider,
                                                                 YouTubeInitializationResult youTubeInitializationResult) {
-                                Toast.makeText(YoutubePlayerActivity.this, "fuck", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(YoutubePlayerActivity.this, "Error", Toast.LENGTH_SHORT).show();
                             }
                         });
             }

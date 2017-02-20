@@ -1,24 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#DEE4E4"
     android:padding="8dp"
     android:orientation="vertical">
 
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivPoster"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="80dp"
+        android:layout_alignBottom="@id/ivPoster"
+        android:layout_alignTop="@id/ivPoster"
+        android:src="@drawable/youtube_icon"/>
+
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="asdasdasdasd"
         android:textColor="#FFF"
-        android:textSize="20sp" />
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:id="@+id/ivPoster"
-        />
+        android:textSize="20sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@+id/ivPoster"
+        android:layout_alignLeft="@id/ivPoster" />
 
 
-
-</LinearLayout>
+</RelativeLayout>

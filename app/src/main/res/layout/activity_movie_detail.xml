@@ -9,8 +9,7 @@
             type="coderschool.com.java.moovy.Models.MovieDetail" />
     </data>
 
-    <RelativeLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/activity_movie_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,7 +38,7 @@
                     android:layout_width="154dp"
                     android:layout_height="231dp"
                     android:padding="10dp"
-                    app:imageUrl="@{detail.posterPath}"/>
+                    app:imageUrl="@{detail.posterPath}" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -51,9 +50,9 @@
                         android:id="@+id/tvTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@{detail.title}"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/text_large_size"
-                        android:text="@{detail.title}"/>
+                        android:textSize="@dimen/text_large_size" />
 
                     <RatingBar
                         android:id="@+id/rbAverageVote"
@@ -73,10 +72,9 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_below="@id/rbAverageVote"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_normal_size"
                         android:text="@{detail.genres}"
-                        />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_normal_size" />
 
                     <TextView
                         android:id="@+id/tvReleaseDate"
@@ -85,8 +83,8 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_below="@+id/tvGenre"
-                        android:textColor="@color/colorPrimary"
-                        android:text="@{detail.releaseDate}"/>
+                        android:text="@{detail.releaseDate}"
+                        android:textColor="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/tvDuration"
@@ -95,8 +93,9 @@
                         android:layout_alignBottom="@id/tvReleaseDate"
                         android:layout_marginLeft="10dp"
                         android:layout_toRightOf="@+id/tvReleaseDate"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text='@{detail.runtime + " minutes"}'/>
+
+                        android:text='@{detail.runtime + " minutes"}'
+                        android:textColor="@color/colorPrimaryDark" />
 
 
                 </RelativeLayout>
@@ -114,9 +113,9 @@
                     android:id="@+id/tvOverview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{detail.overview}"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/text_normal_size"
-                    android:text="@{detail.overview}"/>
+                    android:textSize="@dimen/text_normal_size" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
