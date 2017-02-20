@@ -52,8 +52,8 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 * Hard to keep quality when it comes to many feature
 * Unable to make shadow effect of ImageView
 * Haven't implement RxJava for multiple API call
-* Issue with the emulator
-* Temporarily disable landscape view 
+* Issue with the emulator (solved)
+* Temporarily disable landscape view (solved)
 
 ## Open-source libraries used
 
